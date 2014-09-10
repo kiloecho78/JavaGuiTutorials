@@ -11,9 +11,10 @@ public class CardLayoutExample implements  ActionListener{
     JButton firstButton, lastButton, nextButton, previousButton;
     JPanel cardPanel;
     JLabel titleLabel, descLabel;
-    String cardNames[] = new String[3];
-    String cardDescription[] = new String[3];
+    String cardNames[] = new String[4];
+    String cardDescription[] = new String[4];
     int cardCounter = 0;
+    Color purple = new Color(102,0,204);
 
     public JPanel createContentPane (){
         
@@ -65,6 +66,7 @@ public class CardLayoutExample implements  ActionListener{
         align_1.add(redPanel_1);
         align_1.add(Box.createRigidArea(new Dimension(5,5)));
         align_1.add(bluePanel_1);
+        align_1.setBackground(Color.yellow);
         
         // Shows the bottom alignment.
         JPanel align_2 = new JPanel();
@@ -89,6 +91,22 @@ public class CardLayoutExample implements  ActionListener{
         align_3.add(redPanel_3);
         align_3.add(Box.createRigidArea(new Dimension(5,5)));
         align_3.add(bluePanel_3);
+        
+        JPanel align_4 = new JPanel();
+        align_4.setLayout(new BoxLayout(align_4, BoxLayout.LINE_AXIS));
+        
+        JPanel purplePanel_4 = createSquareJPanel(purple, 50);
+        purplePanel_4.setAlignmentY(Component.TOP_ALIGNMENT);
+        JPanel redPanel_4 = createSquareJPanel(Color.red, 80);
+        redPanel_4.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+        JPanel bluePanel_4 = createSquareJPanel(Color.blue, 110);
+        
+        align_4.add(purplePanel_4);
+        align_4.add(Box.createRigidArea(new Dimension(5,5)));
+        align_4.add(redPanel_4);
+        align_4.add(Box.createRigidArea(new Dimension(5,5)));
+        align_4.add(bluePanel_4);
+        
 
         // This is the important bit of this application.
         // We use a JPanel with a cardPanel, and add the three panels in order.
@@ -105,14 +123,17 @@ public class CardLayoutExample implements  ActionListener{
         cardNames[0] = "Component.CENTER";
         cardNames[1] = "Component.BOTTOM_ALIGNMENT";
         cardNames[2] = "Component.TOP_ALIGNMENT";
+        cardNames[3] = "Component.MIXED_ALIGNMENT";
         
         cardDescription[0] = " - The Center of both widgets is aligned";
         cardDescription[1] = " - The bottom of the first widget is aligned with the center of the second";
         cardDescription[2] = " - The top of the first widget is aligned with the center of the second";
+        cardDescription[3] = " - The top of the 1st is aligned to the center of the 2nd who's bottom is aligned with the center of the 3rd";
         
         cardPanel.add(align_1, cardNames[0]);
         cardPanel.add(align_2, cardNames[1]);
         cardPanel.add(align_3, cardNames[2]);
+        cardPanel.add(align_4, cardNames[3]);
         
         // Now we've completed all that, we add our toolbar to the content pane
         // along with this cardPanel panel.
@@ -175,12 +196,12 @@ public class CardLayoutExample implements  ActionListener{
         else if(e.getSource() == lastButton)
         {
             cl.last(cardPanel);
-            cardCounter = 2;
+            cardCounter = 3;
         }
         else if(e.getSource() == nextButton)
         {
             cl.next(cardPanel);
-            if(cardCounter < 2)
+            if(cardCounter < 3)
             { 
                 cardCounter++;
             }
@@ -198,7 +219,7 @@ public class CardLayoutExample implements  ActionListener{
             }
             else
             {
-                cardCounter = 2;
+                cardCounter = 3;
             }
         }
 
